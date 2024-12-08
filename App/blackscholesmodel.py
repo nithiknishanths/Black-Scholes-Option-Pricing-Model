@@ -7,12 +7,14 @@
 #Changelog
 #20241203 - Initial Draft of Black Scholes Model with basic Parameters
 #
-#-----------------------------------------------------------------------------
+#------------------------------------Import Section------------------------------------
 
 # Import Section
+import streamlit as st
 import numpy as np
 from scipy.stats import norm
 
+#-----------------------------------Math Function------------------------------------
 
 def blackscholes(r, s, K, T, sigma, Type):
     # Calculate Black Scholes Option Price for CALL/PUT
@@ -29,16 +31,27 @@ def blackscholes(r, s, K, T, sigma, Type):
         return price
 
     except:
-        print("Please ensure parameters are correct")
+        return "Please ensure parameters are correct"
+#-----------------------------------------------------------------------------
 
+
+#--------------------------------Main Section-----------------------------------------
+st.write ("Black Scholes Option Pricing Model")
+
+st.number_input("Enter Interest Rate", key="intrate")
+st.number_input("Enter your Underlying ß", key = "underlying")
+st.number_input("Enter your Strike price",key = "strikeprice")
+st.number_input("Enter your No of Days", key = "Days")
+st.number_input("Enter your Voltality", key="voltality")
+st.text_input("CALL/PUTT", key="CallPutt")
 
 
 # Variables Section
-r = 0.01            # Interest
-s = 30              # Underlyingß
-K = 40              # Strike Price
-T = 240/365         # 240 Days
-sigma = 0.3         # 30% Voltality
-Type = 'c'          # Call Option 
+r = st.session_state.intrate            # Interest
+s = st.session_state.underlying             # Underlyingß
+K = st.session_state.strikeprice              # Strike Price
+T = st.session_state.Days / 365         # 240 Days
+sigma = st.session_state.voltality         # 30% Voltality
+Type = st.session_state.CallPutt          # Call Option 
 
-print("Option Price is: ", round(blackscholes(r, s, K, T, sigma, Type = 'P'), 2))
+st.write("Option Price is: ", round(blackscholes(r, s, K, T, sigma, Type = 'P'), 2))
