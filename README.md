@@ -1,4 +1,5 @@
-# Option-Pricing-Models
+# Black-Scholes-Option-Pricing-Model
+
 A Interface made to show CALL-PULL price for options based on Black Scholes Option Pricing models
 
 * Provides Heatmap of Strike Price to Voltality
